@@ -113,7 +113,9 @@ namespace Fanex.ConnectionString.ConnectionWatcher
         private void Handle_OnChange(object sender, SqlNotificationEventArgs e)
         {
             if (e.Type != SqlNotificationType.Change)
+            {
                 throw new ApplicationException("Failed to create queue notification subscription!");
+            }
 
             //Clean up the old notification
             SqlDependency dep = (SqlDependency)sender;

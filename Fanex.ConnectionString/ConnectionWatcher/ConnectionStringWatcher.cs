@@ -174,7 +174,6 @@ namespace Fanex.ConnectionString.ConnectionWatcher
                                     isNew = true;
                                     break;
                                 }
-
                             }
                             else
                             {

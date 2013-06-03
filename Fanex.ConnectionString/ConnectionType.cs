@@ -9,12 +9,16 @@
 
 namespace Fanex.ConnectionString
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     internal enum ConnectionType
     {
         Local = 0,
         Remote = 1
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     internal enum SqlWatcherNotificationType
     {
         Blocking = 0,
