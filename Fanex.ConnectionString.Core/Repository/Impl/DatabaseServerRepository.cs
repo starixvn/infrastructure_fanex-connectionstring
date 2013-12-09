@@ -1,0 +1,66 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="DatabaseServerRepository.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2013.1.21">Created</change>
+// </history>
+
+namespace Fanex.ConnectionString.Core.Repository.Impl
+{
+    using System.Collections.Generic;
+    using Fanex.ConnectionString.Core.Repository.Interface;
+    using Fanex.ConnectionString.Domain;
+    using Fanex.ConnectionString.Model;
+    using Fanex.Data;
+    using NAP.Framework.Data;
+    using System.Linq;
+    using System;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class DatabaseServerRepository : BaseRepository<DatabaseServer>, IDatabaseServerRepository
+    {
+        /// <summary>
+        /// Get all database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of database server.</returns>
+        public override IEnumerable<DatabaseServer> Fetch(ICriteria criteria)
+        {
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                return db.Query<DatabaseServer, Users, DatabaseServer>(
+                    (d, u) => { d.Modifier = u; return d; },
+                    "ModifierId",
+                    criteria.GetSpParams());
+            }
+        }
+        
+        /// <summary>
+        /// Get database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Database server.</returns>
+        public override DatabaseServer Get(ICriteria criteria)
+        {
+            try
+            {
+                var list = this.Fetch(criteria);
+
+                if (!ReferenceEquals(list, null))
+                {
+                    return list.ToList().FirstOrDefault();
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}
