@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.ConnectionString;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 using System.Threading;
-using System.Configuration;
+using Fanex.ConnectionString.Client;
 
 namespace Fanex.ConnectionString.Console
 {

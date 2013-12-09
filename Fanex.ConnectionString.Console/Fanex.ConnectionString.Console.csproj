@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.ConnectionString.Client\Fanex.ConnectionString.Client.csproj">
+      <Project>{3761CF27-F1EC-443D-BFAF-E00D12E261E4}</Project>
+      <Name>Fanex.ConnectionString.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.ConnectionString\Fanex.ConnectionString.csproj">
       <Project>{2095250C-9D24-4EA0-AA6C-BC4FC77C9D6D}</Project>
       <Name>Fanex.ConnectionString</Name>

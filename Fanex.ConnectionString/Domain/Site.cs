@@ -13,12 +13,8 @@ namespace Fanex.ConnectionString.Domain
     using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public class Site : IEntity<int, string>
+    public class Site : Entity
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }        
-
         public string Description { get; set; }
 
         public bool IsActive { get; set; }

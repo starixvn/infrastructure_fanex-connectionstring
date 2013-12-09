@@ -12,10 +12,8 @@ namespace Fanex.ConnectionString.Domain
     using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public class Users : IEntity<int, string>
+    public class Users : Entity
     {
-        public int Id { get; set; }
 
-        public string Name { get; set; }
     }
 }
