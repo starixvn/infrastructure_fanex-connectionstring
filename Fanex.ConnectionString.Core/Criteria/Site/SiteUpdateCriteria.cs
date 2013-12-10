@@ -23,8 +23,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
         private string _description;
 
         public int SiteId { get; set; }
-
-        [Required]
+        
         public string Name
         {
             get

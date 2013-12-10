@@ -25,8 +25,7 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
         private string _description;
 
         public int DbServerId { get; set; }
-
-        [Required]
+        
         public string Name
         {
             get
@@ -39,9 +38,7 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
             }
         }
-
-        [Required]
-        [Display(Name = "Server_IP", ResourceType = typeof(ViewResource))]
+        
         public string ServerIp
         {
             get
