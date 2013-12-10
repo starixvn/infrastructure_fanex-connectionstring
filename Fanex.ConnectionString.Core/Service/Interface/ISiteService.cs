@@ -22,6 +22,8 @@ namespace Fanex.ConnectionString.Core.Service.Interface
 
         IEnumerable<Site> GetAll(string name = "", bool? isActive = null);
 
+        IEnumerable<Site> GetByConnectionId(int connectionId);
+
         ICommandResult Insert(Site site);
 
         ICommandResult Update(Site site);

@@ -174,5 +174,25 @@ namespace Fanex.ConnectionString.Core.Service.Impl
 
             return new CommandResult { Code = -1 };
         }
+
+        /// <summary>
+        /// Gets the by connection identifier.
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        /// <returns></returns>
+        public IEnumerable<Site> GetByConnectionId(int connectionId)
+        {
+            var criteria = new SiteGetByConnectionCriteria
+            {
+                ConnectionId = connectionId
+            };
+
+            if (criteria.IsValid())
+            {
+                return _siteRepository.Fetch(criteria);
+            }
+
+            return null;
+        }
     }
 }

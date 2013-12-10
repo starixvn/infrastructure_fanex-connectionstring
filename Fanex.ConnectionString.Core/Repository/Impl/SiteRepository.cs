@@ -13,7 +13,6 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using System.Linq;
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Domain;
-    using Fanex.ConnectionString.Model;
     using Fanex.Data;
     using NAP.Framework.Data;
 
@@ -35,22 +34,6 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
                     (s, u) => { s.Modifier = u; return s; },
                     "ModifierUserId",
                     criteria.GetSpParams()).OrderBy(x => x.Name).ToList();
-            }
-        }
-
-        /// <summary>
-        /// Get site alias.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>List of site alias.</returns>
-        public IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria)
-        {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                return db.Query<SiteAlias, Site, Users, SiteAlias>(
-                    (sa, s, u) => { sa.Site = s; s.Modifier = u; return sa; },
-                    "Id,ModifierUserId",
-                    criteria.GetSpParams()).OrderBy(x => x.Site.Name).ToList();
             }
         }
 

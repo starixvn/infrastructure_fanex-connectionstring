@@ -9,9 +9,7 @@
 
 namespace Fanex.ConnectionString.Core.Repository.Interface
 {
-    using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
-    using Fanex.ConnectionString.Model;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -19,6 +17,5 @@ namespace Fanex.ConnectionString.Core.Repository.Interface
     /// </summary>
     public interface ISiteRepository : IBaseRepository, IReadonlyRepository<Site>
     {
-        IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria);
     }
 }

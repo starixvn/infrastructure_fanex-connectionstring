@@ -50,13 +50,13 @@
     <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Users.cs" />
-    <Compile Include="Model\AliasConnectionString.cs" />
-    <Compile Include="Model\AliasConnectionStringConnection.cs" />
     <Compile Include="Domain\Database.cs" />
-    <Compile Include="Model\ConnectionStringConnection.cs" />
-    <Compile Include="Model\LogData.cs" />
-    <Compile Include="Model\LogExecSp.cs" />
-    <Compile Include="Model\SiteAlias.cs" />
+    <Compile Include="Model\LogData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LogExecSp.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

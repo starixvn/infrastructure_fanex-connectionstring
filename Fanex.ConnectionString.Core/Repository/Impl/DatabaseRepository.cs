@@ -12,11 +12,11 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Domain;
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
-    using System.Linq;
 
     public class DatabaseRepository : BaseRepository<Database>, IDatabaseRepository
     {

@@ -14,10 +14,10 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.Data;
     using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Framework.Data;
-    using Fanex.ConnectionString.Core.Repository.Interface;
 
     /// <summary>
     /// Base repository.

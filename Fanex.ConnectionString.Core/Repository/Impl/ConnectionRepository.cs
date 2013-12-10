@@ -9,13 +9,13 @@
 
 namespace Fanex.ConnectionString.Core.Repository.Impl
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Domain;
-    using Fanex.NAP.Framework.Data;
-    using System;
     using Fanex.Data;
-    using System.Linq;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Connection repository.

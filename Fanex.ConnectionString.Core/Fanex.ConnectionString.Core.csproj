@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\Connection\ConnectionAssignSiteCriteria.cs" />
+    <Compile Include="Criteria\Connection\ConnectionRemoveSiteCriteria.cs" />
+    <Compile Include="Criteria\Site\SiteGetByConnectionCriteria.cs" />
     <Compile Include="Criteria\Connection\ConnectionSwitchDbServerCriteria.cs" />
     <Compile Include="Criteria\DatabaseServer\DatabaseServerGetHasDatabaseCriteria.cs" />
     <Compile Include="Criteria\Database\DatabaseGetAllCriteria.cs" />

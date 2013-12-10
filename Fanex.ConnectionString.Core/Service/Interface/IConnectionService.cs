@@ -30,5 +30,9 @@ namespace Fanex.ConnectionString.Core.Service.Interface
         ICommandResult UpdateStatus(int id, bool isActive);
 
         ICommandResult SwitchDbServer(string ids, int toDbServerId);
+
+        ICommandResult AssignSite(int connectionId, int siteId);
+
+        ICommandResult RemoveSite(int connectionId, int siteId);
     }
 }

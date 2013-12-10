@@ -13,7 +13,6 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Model;
     using Fanex.Data;

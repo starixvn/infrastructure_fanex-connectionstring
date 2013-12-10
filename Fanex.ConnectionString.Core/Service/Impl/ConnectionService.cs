@@ -239,5 +239,55 @@ namespace Fanex.ConnectionString.Core.Service.Impl
 
             return new CommandResult { Code = -1 };
         }
+
+        /// <summary>
+        /// Assigns the site for connection.
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        /// <param name="siteId">The site identifier.</param>
+        /// <returns>The status of command.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public ICommandResult AssignSite(int connectionId, int siteId)
+        {
+            Check.Argument.IsNotNegativeOrZero(connectionId, "connectionId");
+            Check.Argument.IsNotNegativeOrZero(siteId, "siteId");
+
+            var criteria = new ConnectionAssignSiteCriteria
+            {
+                ConnectionId = connectionId,
+                SiteId = siteId
+            };
+
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+            if (criteria.IsValid() && logCriteria.IsValid())
+            {
+                return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
+            }
+
+            return new CommandResult { Code = -1 };
+        }
+
+
+        public ICommandResult RemoveSite(int connectionId, int siteId)
+        {
+            Check.Argument.IsNotNegativeOrZero(connectionId, "connectionId");
+            Check.Argument.IsNotNegativeOrZero(siteId, "siteId");
+
+            var criteria = new ConnectionRemoveSiteCriteria
+            {
+                ConnectionId = connectionId,
+                SiteId = siteId
+            };
+
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+            if (criteria.IsValid() && logCriteria.IsValid())
+            {
+                return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
+            }
+
+            return new CommandResult { Code = -1 };
+        }
     }
 }
