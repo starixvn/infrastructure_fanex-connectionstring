@@ -14,7 +14,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     /// <summary>
     /// Get site by ID criteria.
     /// </summary>
-    public class SiteGetByIdCriteria : CriteriaBase
+    internal class SiteGetByIdCriteria : CriteriaBase
     {
         public int SiteId { get; set; }
 

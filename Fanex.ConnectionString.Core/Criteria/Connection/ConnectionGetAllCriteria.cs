@@ -14,7 +14,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
     /// <summary>
     /// Get connection by ID criteria.
     /// </summary>
-    public class ConnectionGetAllCriteria : CriteriaBase
+    internal class ConnectionGetAllCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }
 

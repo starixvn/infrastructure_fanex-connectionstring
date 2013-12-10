@@ -11,7 +11,6 @@ namespace Fanex.ConnectionString.Core.Service.Interface
 {
     using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
-    using Fanex.ConnectionString.Model;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -19,13 +18,17 @@ namespace Fanex.ConnectionString.Core.Service.Interface
     /// </summary>
     public interface IDatabaseServerService
     {
-        IEnumerable<DatabaseServer> GetAll(string name = "", bool? isActive = null);
-
-        IEnumerable<DatabaseServer> GetAllHasDatabase();
-
         DatabaseServer GetById(int id);
 
-        ICommandResult InsertOrUpdate(ICriteria criteria);
+        IEnumerable<DatabaseServer> GetAll(string name = "", bool? isActive = null);
+
+        IEnumerable<DatabaseServer> GetDatabaseServerHasDatabases();
+
+        ICommandResult Insert(DatabaseServer databaseServer);
+
+        ICommandResult Update(DatabaseServer databaseServer);
+
+        ICommandResult UpdateStatus(int id, bool isActive);
     }
 }
 

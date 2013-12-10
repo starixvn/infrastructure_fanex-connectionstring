@@ -19,10 +19,16 @@ namespace Fanex.ConnectionString.Core.Service.Interface
     /// </summary>
     public interface IConnectionService
     {
-        IEnumerable<Connection> GetAll(int dbServerId = 0);
-
         Connection GetById(int id);
 
-        ICommandResult InsertOrUpdate(ICriteria criteria);
+        IEnumerable<Connection> GetAll(int dbServerId = 0);
+
+        ICommandResult Insert(Connection connection);
+
+        ICommandResult Update(Connection connection);
+
+        ICommandResult UpdateStatus(int id, bool isActive);
+
+        ICommandResult SwitchDbServer(string ids, int toDbServerId);
     }
 }

@@ -15,7 +15,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     /// <summary>
     /// Update site status criteria.
     /// </summary>
-    public class SiteUpdateStatusCriteria : CriteriaBase
+    internal class SiteUpdateStatusCriteria : CriteriaBase
     {
         public int SiteId { get; set; }
 

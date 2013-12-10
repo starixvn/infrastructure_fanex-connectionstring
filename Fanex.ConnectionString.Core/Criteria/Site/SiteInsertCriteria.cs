@@ -16,39 +16,13 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     /// <summary>
     /// Insert new site criteria.
     /// </summary>
-    public class SiteInsertCriteria : CriteriaBase
+    internal class SiteInsertCriteria : CriteriaBase
     {
-        private string _name;
-
-        private string _description;
-
         public int SiteId { get; set; }
-        
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
 
-            set
-            {
-                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
-            }
-        }
+        public string Name { get; set; }
 
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-
-            set
-            {
-                _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
-            }
-        }
+        public string Description { get; set; }
 
         public bool IsActive { get; set; }
 

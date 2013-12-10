@@ -14,22 +14,9 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
     /// <summary>
     /// Get all database server criteria.
     /// </summary>
-    public class DatabaseServerGetAllCriteria : CriteriaBase
+    internal class DatabaseServerGetAllCriteria : CriteriaBase
     {
-        private string _name;
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-
-            set
-            {
-                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
-            }
-        }
+        public string Name { get; set; }
 
         public bool? IsActive { get; set; }
 

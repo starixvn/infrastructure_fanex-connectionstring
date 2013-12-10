@@ -11,7 +11,7 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 {
     using Fanex.NAP.Framework.Data;
 
-    public class DatabaseGetByIdCriteria : CriteriaBase
+    internal class DatabaseGetByIdCriteria : CriteriaBase
     {
         public int DatabaseId { get; set; }
 

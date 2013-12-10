@@ -18,10 +18,14 @@ namespace Fanex.ConnectionString.Core.Service.Interface
     /// </summary>
     public interface ISiteService
     {
-        IEnumerable<Site> GetAll(string name = "", bool? isActive = null);
-
         Site GetById(int id);
 
-        ICommandResult InsertOrUpdate(ICriteria criteria);
+        IEnumerable<Site> GetAll(string name = "", bool? isActive = null);
+
+        ICommandResult Insert(Site site);
+
+        ICommandResult Update(Site site);
+
+        ICommandResult UpdateStatus(int id, bool isActive);
     }
 }

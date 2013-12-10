@@ -15,7 +15,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
     /// <summary>
     /// Update default connection criteria.
     /// </summary>
-    public class ConnectionUpdateStatusCriteria : CriteriaBase
+    internal class ConnectionUpdateStatusCriteria : CriteriaBase
     {
         public int Id { get; set; }
 

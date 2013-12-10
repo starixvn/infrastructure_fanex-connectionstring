@@ -15,7 +15,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     /// <summary>
     /// Get all site criteria.
     /// </summary>
-    public class SiteGetAllCriteria : CriteriaBase
+    internal class SiteGetAllCriteria : CriteriaBase
     {
         private string _name;
 

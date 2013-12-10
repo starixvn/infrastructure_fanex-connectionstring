@@ -10,12 +10,9 @@
 namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
-    public class DatabaseUpdateCriteria : CriteriaBase
+    internal class DatabaseUpdateCriteria : CriteriaBase
     {
         public int Id { get; set; }
 

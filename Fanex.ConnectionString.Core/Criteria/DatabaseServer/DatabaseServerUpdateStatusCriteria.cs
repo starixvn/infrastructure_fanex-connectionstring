@@ -15,7 +15,7 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
     /// <summary>
     /// Update database server status criteria.
     /// </summary>
-    public class DatabaseServerUpdateStatusCriteria : CriteriaBase
+    internal class DatabaseServerUpdateStatusCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }
 

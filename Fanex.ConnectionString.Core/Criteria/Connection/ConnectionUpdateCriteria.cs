@@ -10,13 +10,12 @@
 namespace Fanex.ConnectionString.Core.Criteria.Connection
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Update connection criteria.
     /// </summary>
-    public class ConnectionUpdateCriteria : CriteriaBase
+    internal class ConnectionUpdateCriteria : CriteriaBase
     {
         public int Id { get; set; }
 

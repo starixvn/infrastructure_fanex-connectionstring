@@ -12,7 +12,7 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
     using System;
     using Fanex.NAP.Framework.Data;
 
-    public class DatabaseServerGetHasDatabaseCriteria : CriteriaBase
+    internal class DatabaseServerGetHasDatabaseCriteria : CriteriaBase
     {
         public override string GetSettingKey()
         {

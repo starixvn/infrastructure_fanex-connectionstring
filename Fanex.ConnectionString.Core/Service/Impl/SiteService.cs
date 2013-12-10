@@ -9,6 +9,7 @@
 
 namespace Fanex.ConnectionString.Core.Service.Impl
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.Common.Helper;
     using Fanex.ConnectionString.Core.Criteria.Site;
@@ -16,12 +17,11 @@ namespace Fanex.ConnectionString.Core.Service.Impl
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Core.Service.Interface;
     using Fanex.ConnectionString.Domain;
-    using Fanex.ConnectionString.Model;
     using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site service class.
     /// </summary>
     public class SiteService : BaseService, ISiteService
     {
@@ -46,11 +46,31 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         #endregion
 
         /// <summary>
-        /// Get all sites.
+        /// Gets the site by identifier.
         /// </summary>
-        /// <param name="name">Site object name.</param>
-        /// <param name="databaseServerId">Database server ID.</param>
-        /// <returns>List of site.</returns>
+        /// <param name="id">The site identifier.</param>
+        /// <returns>The site information.</returns>
+        public Site GetById(int id)
+        {
+            var criteria = new SiteGetByIdCriteria
+            {
+                SiteId = id
+            };
+
+            if (criteria.IsValid())
+            {
+                return _siteRepository.Get(criteria);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets all site.
+        /// </summary>
+        /// <param name="name">The search site name.</param>
+        /// <param name="isActive">The status of site need search.</param>
+        /// <returns>The site collections.</returns>
         public IEnumerable<Site> GetAll(string name = "", bool? isActive = null)
         {
             var criteria = new SiteGetAllCriteria
@@ -68,34 +88,54 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         }
 
         /// <summary>
-        /// Get site by ID.
+        /// Inserts the specified site.
         /// </summary>
-        /// <param name="id">Site object ID.</param>
-        /// <returns>Site object.</returns>
-        public Site GetById(int id)
+        /// <param name="site">The site information.</param>
+        /// <returns>The status of command.</returns>
+        public ICommandResult Insert(Site site)
         {
-            var criteria = new SiteGetByIdCriteria
+            Check.Argument.IsNotNull(site, "site");
+            Check.Argument.IsNotEmpty(site.Name, "name");
+
+            var criteria = new SiteInsertCriteria
             {
-                SiteId = id
+                Name = site.Name,
+                Description = site.Description,
+                IsActive = site.IsActive,
+                CreatedDate = DateTime.Now,
+                Creator = this.ServiceContext.UserId
             };
 
-            if (criteria.IsValid())
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                return _siteRepository.Get(criteria);
+                return _siteRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
-            return null;
+            return new CommandResult { Code = -1 };
         }
 
         /// <summary>
-        /// Insert or update site.
+        /// Updates the specified site.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Command result.</returns>
-        public ICommandResult InsertOrUpdate(ICriteria criteria)
+        /// <param name="site">The site.</param>
+        /// <returns>The status of command.</returns>
+        public ICommandResult Update(Site site)
         {
-            // check parameters
-            Check.Argument.IsNotNull(criteria, "criteria");
+            Check.Argument.IsNotNull(site, "site");
+            Check.Argument.IsNotNegativeOrZero(site.Id, "id");
+            Check.Argument.IsNotEmpty(site.Name, "name");
+
+            var criteria = new SiteUpdateCriteria
+            {
+                SiteId = site.Id,
+                Name = site.Name,
+                Description = site.Description,
+                IsActive = site.IsActive,
+                ModifiedDate = DateTime.Now,
+                Modifier = this.ServiceContext.UserId
+            };
 
             LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
@@ -104,18 +144,26 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 return _siteRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
-            return null;
+            return new CommandResult { Code = -1 };
         }
 
         /// <summary>
-        /// Update site status.
+        /// Updates the status of site.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Command result.</returns>
-        public ICommandResult UpdateStatus(ICriteria criteria)
+        /// <param name="id">The site identifier.</param>
+        /// <param name="isActive">If set to <c>true</c> [Site is active].</param>
+        /// <returns>The status of command.</returns>
+        public ICommandResult UpdateStatus(int id, bool isActive)
         {
-            // check parameters
-            Check.Argument.IsNotNull(criteria, "criteria");
+            Check.Argument.IsNotNegativeOrZero(id, "id");
+
+            var criteria = new SiteUpdateStatusCriteria
+            {
+                SiteId = id,
+                IsActive = isActive,
+                ModifiedDate = DateTime.Now,
+                Modifier = this.ServiceContext.UserId
+            };
 
             LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
@@ -124,7 +172,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 return _siteRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
-            return null;
+            return new CommandResult { Code = -1 };
         }
     }
 }

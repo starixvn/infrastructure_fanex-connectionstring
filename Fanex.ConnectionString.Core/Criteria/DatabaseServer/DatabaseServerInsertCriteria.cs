@@ -16,7 +16,7 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
     /// <summary>
     /// Insert database server criteria.
     /// </summary>
-    public class DatabaseServerInsertCriteria : CriteriaBase
+    internal class DatabaseServerInsertCriteria : CriteriaBase
     {
         private string _name;
 

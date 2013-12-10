@@ -21,6 +21,10 @@ namespace Fanex.ConnectionString.Core.Service.Interface
 
         IEnumerable<Database> GetByDbServerId(int id);
 
-        ICommandResult InsertOrUpdate(ICriteria criteria);
+        ICommandResult Insert(Database database);
+
+        ICommandResult Update(Database database);
+
+        ICommandResult UpdateStatus(int id, bool isActive);
     }
 }

@@ -9,13 +9,9 @@
 
 namespace Fanex.ConnectionString.Core.Criteria.Database
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
-    public class DatabaseServerGetByDbServerIdCriteria : CriteriaBase
+    internal class DatabaseServerGetByDbServerIdCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }
 

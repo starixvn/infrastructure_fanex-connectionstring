@@ -14,7 +14,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     /// <summary>
     /// Get site by alias criteria.
     /// </summary>
-    public class SiteGetByAliasCriteria : CriteriaBase
+    internal class SiteGetByAliasCriteria : CriteriaBase
     {
         public int AliasId { get; set; }
 
