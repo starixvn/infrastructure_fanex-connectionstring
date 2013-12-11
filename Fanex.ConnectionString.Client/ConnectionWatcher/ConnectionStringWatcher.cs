@@ -18,7 +18,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System.Xml.Linq;
     using Fanex.Caching;
     using Fanex.ConnectionString.Client.Configuration;
-    using Fanex.ConnectionString.Constant;
+    using System.Collections.Generic;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     internal static class ConnectionStringWatcher
@@ -27,7 +27,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
 
         private static ConnectionStringDataAccess _connectionStringDataAccess;
 
-        private static readonly string _commandText = "bodb_ConnectionString.dbo.ConnectionString_ClientGet";
+        private static readonly string _commandText = "bodb_ConnectionString.dbo.Connection_ClientGet";
 
         private static readonly string _sqlConnection = ConnectionSettings.Settings.Connection;
 
@@ -65,25 +65,26 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
             try
             {
                 var collection = new ConnectionStringSettingsCollection();
+                var allConnection = new Dictionary<int, string>();
 
-                //Do something with the updated DataSet object
                 while (reader.Read())
                 {
-                    var name = reader["Name"].ToString().ToLower();
-                    var serverIp = reader["ServerIP"].ToString();
-                    var initialCatalog = reader["InitialCatalog"].ToString();
-                    var integratedSecurity = Convert.ToBoolean(reader["IntegratedSecurity"].ToString());
-                    var userID = reader["UserID"].ToString();
-                    var password = reader["Password"].ToString();
-                    var freeText = reader["FreeText"].ToString();
-                    var siteId = Convert.ToInt32(reader["SiteId"].ToString());
-                    string tempConnection = string.Format(ConnectionStringConstant.CONNECTIONFORMAT,
+                    var connectionId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"].ToString()) : 0;
+                    var name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty;
+                    var serverIp = reader["ServerIP"] != DBNull.Value ? reader["ServerIP"].ToString() : string.Empty;
+                    var databaseName = reader["DatabaseName"] != DBNull.Value ? reader["DatabaseName"].ToString() : string.Empty;
+                    var loginName = reader["LoginName"] != DBNull.Value ? reader["LoginName"].ToString() : string.Empty;
+                    var password = reader["Password"] != DBNull.Value ? reader["Password"].ToString() : string.Empty;
+                    var freeText = reader["FreeText"] != DBNull.Value ? reader["FreeText"].ToString() : string.Empty;
+                    var siteId = reader["SiteId"] != DBNull.Value ? Convert.ToInt32(reader["SiteId"].ToString()) : 0;
+
+                    var connectionString = string.Format(ConnectionStringConstant.CONNECTIONFORMAT,
                                                             serverIp,
-                                                            initialCatalog,
-                                                            integratedSecurity,
-                                                            userID,
+                                                            databaseName,
+                                                            loginName,
                                                             password,
                                                             freeText);
+
                     if (_currentSiteId != 0)
                     {
                         if (siteId == _currentSiteId)
@@ -91,19 +92,24 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                             collection.Add(new ConnectionStringSettings
                             {
                                 Name = name,
-                                ConnectionString = tempConnection,
+                                ConnectionString = connectionString,
                                 ProviderName = ConnectionStringConstant.PROVIDERNAME
                             });
                         }
                     }
                     else
                     {
-                        collection.Add(new ConnectionStringSettings
+                        if (!allConnection.ContainsKey(connectionId))
                         {
-                            Name = name,
-                            ConnectionString = tempConnection,
-                            ProviderName = ConnectionStringConstant.PROVIDERNAME
-                        });
+                            allConnection.Add(connectionId, name);
+
+                            collection.Add(new ConnectionStringSettings
+                            {
+                                Name = name,
+                                ConnectionString = connectionString,
+                                ProviderName = ConnectionStringConstant.PROVIDERNAME
+                            });
+                        }
                     }
                 }
 
@@ -148,44 +154,20 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
 
                 document.Add(elementRoot);
 
-                var isNew = true;
+                var hasChange = false;
 
                 if (File.Exists(_filePath))
                 {
-                    isNew = false;
                     var configDocument = XDocument.Load(_filePath);
-                    var elementConnectionRoot = configDocument.Descendants("connectionStrings");
-                    var count = 0;
 
-                    foreach (var item in elementConnectionRoot)
-                    {
-                        var elementName = item.Descendants("add");
-
-                        foreach (var itemName in elementName)
-                        {
-                            count++;
-                            string name = itemName.Attribute("name").Value;
-                            if (collection[name] != null)
-                            {
-                                string connection = itemName.Attribute("connectionString").Value;
-                                if (string.Compare(connection, collection[name].ConnectionString) != 0)
-                                {
-                                    isNew = true;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                isNew = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    isNew = count == 0 ? true : isNew;
+                    hasChange = !string.Equals(document.ToString(), configDocument.ToString(), StringComparison.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    hasChange = true;
                 }
 
-                if (isNew)
+                if (hasChange)
                 {
                     document.Save(_filePath);
                 }

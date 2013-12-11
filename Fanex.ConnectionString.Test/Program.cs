@@ -17,12 +17,12 @@ namespace Fanex.ConnectionString.Test
         {
             while (true)
             {
-                var collection = ConnectionStringManager.ConnectionStrings;                
+                //var collection = ConnectionStringManager.ConnectionStrings;
 
-                foreach (ConnectionStringSettings item in collection)
-                {
-                    System.Console.WriteLine("alias:{0},connection:{1}", item.Name, item.ConnectionString);
-                }
+                //foreach (ConnectionStringSettings item in collection)
+                //{
+                //    System.Console.WriteLine("alias:{0},connection:{1}", item.Name, item.ConnectionString);
+                //}
                 System.Console.WriteLine("----------");
 
                 Thread.Sleep(5000);

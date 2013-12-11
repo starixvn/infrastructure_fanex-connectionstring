@@ -119,7 +119,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 CreatedDate = DateTime.Now,
                 Creator = ServiceContext.UserId,
                 DbServerId = database.DatabaseServer.Id,
-                Id = database.Id,
+                DatabaseId = database.Id,
                 IsActive = database.IsActive,
                 Name = database.Name,
                 ServerAlias = database.ServerAlias
@@ -153,7 +153,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 ModifiedDate = DateTime.Now,
                 Modifier = ServiceContext.UserId,
                 DbServerId = database.DatabaseServer.Id,
-                Id = database.Id,
+                DatabaseId = database.Id,
                 IsActive = database.IsActive,
                 Name = database.Name,
                 ServerAlias = database.ServerAlias

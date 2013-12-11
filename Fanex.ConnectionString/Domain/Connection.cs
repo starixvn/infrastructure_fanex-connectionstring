@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionString.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Connection.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,11 +11,14 @@ namespace Fanex.ConnectionString.Domain
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.ConnectionString.Constant;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The connection class.
+    /// </summary>
     public class Connection : Entity
     {
+        private const string CONNECTIONFORMAT = "packet size=4096; Data Source={0};Initial Catalog={1}; integrated security=false; User ID={2}; Password={3}; {4}";
+
         public string LoginName { get; set; }
 
         public string Password { get; set; }
@@ -34,12 +37,13 @@ namespace Fanex.ConnectionString.Domain
             {
                 if (!ReferenceEquals(DatabaseServer, null) && DatabaseServer.ServerIP != string.Empty)
                 {
-                    string tempConnection = string.Format(ConnectionStringConstant.CONNECTIONFORMAT,
-                                                                DatabaseServer.ServerIP,
-                                                                DatabaseServer.Name,
-                                                                LoginName,
-                                                                Password,
-                                                                FreeText);
+                    string tempConnection = string.Format(
+                                                            CONNECTIONFORMAT,
+                                                            DatabaseServer.ServerIP,
+                                                            DatabaseServer.Name,
+                                                            LoginName,
+                                                            Password,
+                                                            FreeText);
                     return tempConnection;
                 }
 

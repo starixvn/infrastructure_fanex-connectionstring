@@ -14,8 +14,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    
     internal class ConnectionStringDataAccess : IDisposable
     {
         #region Memeber

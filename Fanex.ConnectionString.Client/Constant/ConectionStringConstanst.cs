@@ -7,12 +7,11 @@
 //   <change who="Edward.Nguyen" date="2013.1.11">Created</change>
 // </history>
 
-namespace Fanex.ConnectionString.Constant
+namespace Fanex.ConnectionString.Client
 {
     using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public static class ConnectionStringConstant
+    
+    internal static class ConnectionStringConstant
     {
         public const int GETALL = 0;
 

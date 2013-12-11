@@ -18,7 +18,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
     /// </summary>
     internal class ConnectionInsertCriteria : CriteriaBase
     {
-        public int Id { get; set; }
+        public int ConnectionId { get; set; }
 
         public string Name { get; set; }
 

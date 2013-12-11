@@ -131,7 +131,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 DatabaseId = connection.Database.Id,
                 DbServerId = connection.DatabaseServer.Id,
                 FreeText = connection.FreeText,
-                Id = connection.Id,
+                ConnectionId = connection.Id,
                 IsActive = connection.IsActive,
                 LoginName = connection.LoginName,
                 Name = connection.Name,
@@ -167,7 +167,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
                 DatabaseId = connection.Database.Id,
                 DbServerId = connection.DatabaseServer.Id,
                 FreeText = connection.FreeText,
-                Id = connection.Id,
+                ConnectionId = connection.Id,
                 IsActive = connection.IsActive,
                 LoginName = connection.LoginName,
                 Name = connection.Name,
@@ -194,7 +194,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
 
             var criteria = new ConnectionUpdateStatusCriteria
             {
-                Id = id,
+                ConnectionId = id,
                 IsActive = isActive,
                 ModifiedDate = DateTime.Now,
                 Modifier = this.ServiceContext.UserId

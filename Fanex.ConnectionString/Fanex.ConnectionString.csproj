@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constant\ConectionStringConstanst.cs" />
     <Compile Include="Domain\Connection.cs" />
     <Compile Include="Domain\DatabaseServer.cs" />
     <Compile Include="Domain\Entity.cs" />

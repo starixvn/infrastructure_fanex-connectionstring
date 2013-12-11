@@ -17,7 +17,7 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
     /// </summary>
     internal class ConnectionUpdateStatusCriteria : CriteriaBase
     {
-        public int Id { get; set; }
+        public int ConnectionId { get; set; }
 
         public bool IsActive { get; set; }
 

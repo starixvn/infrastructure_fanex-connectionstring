@@ -15,7 +15,6 @@ namespace Fanex.ConnectionString.Client
     using Fanex.Caching;
     using Fanex.ConnectionString.Client.Configuration;
     using Fanex.ConnectionString.Client.ConnectionWatcher;
-    using Fanex.ConnectionString.Constant;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public static class ConnectionStringManager

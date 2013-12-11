@@ -14,7 +14,7 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 
     internal class DatabaseUpdateCriteria : CriteriaBase
     {
-        public int Id { get; set; }
+        public int DatabaseId { get; set; }
 
         public string Name { get; set; }
 
@@ -35,7 +35,7 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 
         public override bool IsValid()
         {
-            return Id > 0;
+            return DatabaseId > 0;
         }
     }
 }

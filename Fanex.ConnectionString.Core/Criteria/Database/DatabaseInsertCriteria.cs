@@ -14,7 +14,7 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 
     internal class DatabaseInsertCriteria : CriteriaBase
     {
-        public int Id { get; set; }
+        public int DatabaseId { get; set; }
 
         public string Name { get; set; }
 

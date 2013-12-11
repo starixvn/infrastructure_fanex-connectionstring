@@ -46,7 +46,7 @@ namespace Fanex.ConnectionString.Client.Configuration
             set { this[__CONNECTION_STRING] = value; }
         }
 
-        [ConfigurationProperty(__IS_LOCAL, IsRequired = false, DefaultValue = true)]
+        [ConfigurationProperty(__IS_LOCAL, IsRequired = true, DefaultValue = true)]
         public bool IsLocal
         {
             get { return (bool)this[__IS_LOCAL]; }
@@ -60,7 +60,7 @@ namespace Fanex.ConnectionString.Client.Configuration
             set { this[__FILE_PATH] = value; }
         }
 
-        [ConfigurationProperty(__SITE_ID, IsRequired = false, DefaultValue = 0)]
+        [ConfigurationProperty(__SITE_ID, IsRequired = true, DefaultValue = 0)]
         public int SiteId
         {
             get { return (int)this[__SITE_ID]; }
