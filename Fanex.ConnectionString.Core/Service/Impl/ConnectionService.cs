@@ -70,15 +70,15 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         /// <summary>
         /// Gets connection by database server id.
         /// </summary>
-        /// <param name="dbServerId">The database server identifier.</param>
+        /// <param name="databaseServerId">The database server identifier.</param>
         /// <returns>Connection collection.</returns>
-        public IEnumerable<Connection> GetAll(int dbServerId = 0)
+        public IEnumerable<Connection> GetAll(int databaseServerId = 0)
         {
-            Check.Argument.IsNotNegative(dbServerId, "dbServerId");
+            Check.Argument.IsNotNegative(databaseServerId, "databaseServerId");
 
             var criteria = new ConnectionGetAllCriteria
             {
-                DbServerId = dbServerId
+                DbServerId = databaseServerId
             };
 
             if (criteria.IsValid())
@@ -108,7 +108,6 @@ namespace Fanex.ConnectionString.Core.Service.Impl
 
             return null;
         }
-
 
         /// <summary>
         /// Inserts the specified connection.
@@ -216,7 +215,6 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         /// <param name="ids">The array connection id.</param>
         /// <param name="toDbServerId">To database server identifier.</param>
         /// <returns>The status of command.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public ICommandResult SwitchDbServer(string ids, int toDbServerId)
         {
             Check.Argument.IsNotEmpty(ids, "ids");
@@ -246,7 +244,6 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         /// <param name="connectionId">The connection identifier.</param>
         /// <param name="siteId">The site identifier.</param>
         /// <returns>The status of command.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public ICommandResult AssignSite(int connectionId, int siteId)
         {
             Check.Argument.IsNotNegativeOrZero(connectionId, "connectionId");
@@ -268,7 +265,12 @@ namespace Fanex.ConnectionString.Core.Service.Impl
             return new CommandResult { Code = -1 };
         }
 
-
+        /// <summary>
+        /// Removes the site of connection.
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        /// <param name="siteId">The site identifier.</param>
+        /// <returns>The status of command.</returns>
         public ICommandResult RemoveSite(int connectionId, int siteId)
         {
             Check.Argument.IsNotNegativeOrZero(connectionId, "connectionId");

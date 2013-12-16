@@ -12,6 +12,9 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The connection switch database server criteria class.
+    /// </summary>
     internal class ConnectionSwitchDbServerCriteria : CriteriaBase
     {
         public string ConnectionIds { get; set; }

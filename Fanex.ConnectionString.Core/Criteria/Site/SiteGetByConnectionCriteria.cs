@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionGetSiteCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SiteGetByConnectionCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,6 +12,9 @@ namespace Fanex.ConnectionString.Core.Criteria.Site
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The site get by connection criteria class.
+    /// </summary>
     internal class SiteGetByConnectionCriteria : CriteriaBase
     {
         public int ConnectionId { get; set; }

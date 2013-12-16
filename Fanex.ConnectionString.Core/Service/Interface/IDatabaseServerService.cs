@@ -31,4 +31,3 @@ namespace Fanex.ConnectionString.Core.Service.Interface
         ICommandResult UpdateStatus(int id, bool isActive);
     }
 }
-

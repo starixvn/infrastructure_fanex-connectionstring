@@ -11,6 +11,9 @@ namespace Fanex.ConnectionString.Core.Criteria.Database
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database server get by database server identifier criteria class.
+    /// </summary>
     internal class DatabaseServerGetByDbServerIdCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

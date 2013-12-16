@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionStringSettings.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConnectionSettings.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,9 @@ namespace Fanex.ConnectionString.Client.Configuration
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The connection string setting.
+    /// </summary>
     internal class ConnectionSettings : ConfigurationSection
     {
         #region consts

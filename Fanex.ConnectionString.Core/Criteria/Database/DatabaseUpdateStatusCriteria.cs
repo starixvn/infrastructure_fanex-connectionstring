@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabaseUpdateStatusCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseUpdateStatusCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,6 +12,9 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database update status criteria class.
+    /// </summary>
     internal class DatabaseUpdateStatusCriteria : CriteriaBase
     {
         public int DatabaseId { get; set; }

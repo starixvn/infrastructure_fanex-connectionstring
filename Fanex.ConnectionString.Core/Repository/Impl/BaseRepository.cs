@@ -12,8 +12,6 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.Data;
     using Fanex.NAP.Core.Criteria.Misc;
@@ -25,52 +23,12 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     /// <typeparam name="T">The element type of the class.</typeparam>
     public class BaseRepository<T> : ReadonlyRepository<T>, IBaseRepository
     {
-        ///// <summary>
-        ///// Get Data table from Criteria.
-        ///// </summary>
-        ///// <param name="criteria">A Criteria.</param>
-        ///// <returns>A table contains information.</returns>
-        //public virtual DataTable GetDataTable(ICriteria criteria)
-        //{
-        //    using (var db = new ObjectDb(criteria.GetSettingKey()))
-        //    {
-        //        DataSet ds = db.ExecuteDataSet(criteria.GetSpParams());
-        //        if (!ReferenceEquals(ds, null) && ds.Tables.Count > 0)
-        //        {
-        //            return ds.Tables[0];
-        //        }
-
-        //        return null;
-        //    }
-        //}
-
         /// <summary>
-        /// Fetch item.
+        /// Inserts the or update.
         /// </summary>
-        /// <typeparam name="S">Object class.</typeparam>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="mapObjectFunction">Map object function.</param>
-        /// <returns>List of object.</returns>
-        public IEnumerable<S> Fetch<S>(
-            ICriteria criteria,
-            Func<IDataReader, S> mapObjectFunction) where S : class
-        {
-            IList<S> listObject = new List<S>();
-
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                using (var reader = db.ExecuteReader(criteria.GetSpParams()))
-                {
-                    while (reader.Read())
-                    {
-                        listObject.Add(mapObjectFunction(reader));
-                    }
-                }
-            }
-
-            return listObject;
-        }
-
+        /// <param name="logCriteria">The log criteria.</param>
+        /// <returns>Status of command.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             Hashtable hash = criteria.GetSpParams();

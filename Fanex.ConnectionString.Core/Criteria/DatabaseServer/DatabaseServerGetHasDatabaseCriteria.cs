@@ -12,6 +12,9 @@ namespace Fanex.ConnectionString.Core.Criteria.DatabaseServer
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database server get by has database criteria class.
+    /// </summary>
     internal class DatabaseServerGetHasDatabaseCriteria : CriteriaBase
     {
         public override string GetSettingKey()

@@ -9,11 +9,10 @@
 
 namespace Fanex.ConnectionString.Domain
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The user class.
+    /// </summary>
     public class Users : Entity
     {
-
     }
 }

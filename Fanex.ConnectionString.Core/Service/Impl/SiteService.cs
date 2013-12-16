@@ -119,7 +119,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         /// <summary>
         /// Updates the specified site.
         /// </summary>
-        /// <param name="site">The site.</param>
+        /// <param name="site">The site object.</param>
         /// <returns>The status of command.</returns>
         public ICommandResult Update(Site site)
         {
@@ -179,7 +179,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         /// Gets the by connection identifier.
         /// </summary>
         /// <param name="connectionId">The connection identifier.</param>
-        /// <returns></returns>
+        /// <returns>The collection of site object.</returns>
         public IEnumerable<Site> GetByConnectionId(int connectionId)
         {
             var criteria = new SiteGetByConnectionCriteria

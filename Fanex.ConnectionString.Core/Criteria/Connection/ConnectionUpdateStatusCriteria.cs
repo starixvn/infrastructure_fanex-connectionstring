@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionUpdateDefaultCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConnectionUpdateStatusCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------

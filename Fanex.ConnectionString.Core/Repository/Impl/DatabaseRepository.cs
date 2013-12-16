@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabaseRepository.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -18,8 +18,16 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database repository class.
+    /// </summary>
     public class DatabaseRepository : BaseRepository<Database>, IDatabaseRepository
     {
+        /// <summary>
+        /// Gets the specified criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The database object.</returns>
         public override Database Get(ICriteria criteria)
         {
             try
@@ -39,6 +47,11 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
             }
         }
 
+        /// <summary>
+        /// Fetches the specified criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The collection of database object.</returns>
         public override IEnumerable<Database> Fetch(ICriteria criteria)
         {
             try

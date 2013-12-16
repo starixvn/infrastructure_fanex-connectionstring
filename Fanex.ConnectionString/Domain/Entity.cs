@@ -9,6 +9,9 @@
 
 namespace Fanex.ConnectionString.Domain
 {
+    /// <summary>
+    /// The entity class.
+    /// </summary>
     public class Entity : IEntity<int, string>
     {
         public int Id { get; set; }

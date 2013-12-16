@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabaseGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,6 +11,9 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database get all criteria class.
+    /// </summary>
     internal class DatabaseGetAllCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

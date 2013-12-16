@@ -11,6 +11,9 @@ namespace Fanex.ConnectionString.Core.Criteria.Connection
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The connection assign site criteria class.
+    /// </summary>
     internal class ConnectionAssignSiteCriteria : CriteriaBase
     {
         public int ConnectionId { get; set; }

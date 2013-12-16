@@ -22,6 +22,11 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     /// </summary>
     public class ConnectionRepository : BaseRepository<Connection>, IConnectionRepository
     {
+        /// <summary>
+        /// Fetches the specified criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The collection of connection object.</returns>
         public override IEnumerable<Connection> Fetch(ICriteria criteria)
         {
             try
@@ -44,6 +49,11 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
             }
         }
 
+        /// <summary>
+        /// Gets the specified criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The connection object.</returns>
         public override Connection Get(ICriteria criteria)
         {
             try

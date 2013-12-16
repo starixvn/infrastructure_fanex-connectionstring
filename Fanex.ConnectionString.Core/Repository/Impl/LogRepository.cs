@@ -42,20 +42,5 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
                 return logList.AsQueryable();
             }
         }
-
-        /// <summary>
-        /// Get log by ID.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Log execute SP.</returns>
-        public LogExecSp GetById(ICriteria criteria)
-        {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                Hashtable hash = criteria.GetSpParams();
-
-                return db.QueryEntity<LogExecSp>(hash);
-            }
-        }
     }
 }

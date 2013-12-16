@@ -78,7 +78,6 @@
     <Compile Include="Criteria\DatabaseServer\DatabaseServerUpdateCriteria.cs" />
     <Compile Include="Criteria\DatabaseServer\DatabaseServerUpdateStatusCriteria.cs" />
     <Compile Include="Criteria\LogExecSp\LogExecSpSearchCriteria.cs" />
-    <Compile Include="Criteria\LogExecSp\LogGetByIdCriteria.cs" />
     <Compile Include="Criteria\Site\SiteGetAllCriteria.cs" />
     <Compile Include="Criteria\Site\SiteGetByAliasCriteria.cs" />
     <Compile Include="Criteria\Site\SiteGetByDbServerCriteria.cs" />

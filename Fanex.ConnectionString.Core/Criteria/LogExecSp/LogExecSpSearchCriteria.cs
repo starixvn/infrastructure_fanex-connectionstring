@@ -10,7 +10,6 @@
 namespace Fanex.ConnectionString.Core.Criteria.LogExecSp
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -18,44 +17,15 @@ namespace Fanex.ConnectionString.Core.Criteria.LogExecSp
     /// </summary>
     public class LogExecSpSearchCriteria : CriteriaBase
     {
-        private string _username;
+        public string Username { get; set; }
 
-        private string _name;
+        public string Name { get; set; }
 
-        public string Username
-        {
-            get
-            {
-                return _username;
-            }
+        public int FilterType { get; set; }
 
-            set
-            {
-                _username = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-
-            set
-            {
-                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
-            }
-        }
-
-        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}", ApplyFormatInEditMode = true)]
         public DateTime To { get; set; }
-
-        [Display(Name = "Filter", ResourceType = typeof(ViewResource))]
-        public int FilterType { get; set; }
 
         public int PageIndex { get; set; }
 

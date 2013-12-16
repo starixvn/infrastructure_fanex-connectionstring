@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServer.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Site.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,9 @@ namespace Fanex.ConnectionString.Domain
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The site class.
+    /// </summary>
     public class Site : Entity
     {
         public string Description { get; set; }

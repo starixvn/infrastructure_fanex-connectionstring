@@ -50,9 +50,6 @@
     <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Users.cs" />
     <Compile Include="Domain\Database.cs" />
-    <Compile Include="Model\LogData.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\LogExecSp.cs">
       <SubType>Code</SubType>
     </Compile>

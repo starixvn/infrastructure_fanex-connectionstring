@@ -17,6 +17,5 @@ namespace Fanex.ConnectionString.Core.Repository.Interface
     /// </summary>
     public interface IDatabaseServerRepository : IBaseRepository, IReadonlyRepository<DatabaseServer>
     {
-
     }
 }

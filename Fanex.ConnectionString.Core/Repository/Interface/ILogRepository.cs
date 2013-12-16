@@ -19,7 +19,5 @@ namespace Fanex.ConnectionString.Core.Repository.Interface
     public interface ILogRepository : IBaseRepository
     {
         IEnumerable<LogExecSp> Fetch(ICriteria criteria, out int totalRows);
-
-        LogExecSp GetById(ICriteria criteria);
     }
 }

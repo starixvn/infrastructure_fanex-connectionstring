@@ -8,20 +8,17 @@
 // </history>
 
 namespace Fanex.ConnectionString.Client
-{
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+{    
     internal enum ConnectionType
     {
+        /// <summary>
+        /// The local.
+        /// </summary>
         Local = 0,
-        Remote = 1
-    }
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    internal enum SqlWatcherNotificationType
-    {
-        Blocking = 0,
-        Threaded = 1
+        /// <summary>
+        /// The remote.
+        /// </summary>
+        Remote = 1
     }
 }

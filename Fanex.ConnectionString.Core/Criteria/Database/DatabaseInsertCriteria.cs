@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabaseInsertCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseInsertCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,6 +12,9 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database insert criteria class.
+    /// </summary>
     internal class DatabaseInsertCriteria : CriteriaBase
     {
         public int DatabaseId { get; set; }

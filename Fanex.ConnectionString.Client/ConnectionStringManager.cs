@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionString.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConnectionStringManager.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,12 +16,14 @@ namespace Fanex.ConnectionString.Client
     using Fanex.ConnectionString.Client.Configuration;
     using Fanex.ConnectionString.Client.ConnectionWatcher;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The connection string manager class.
+    /// </summary>
     public static class ConnectionStringManager
     {
         #region Member
 
-        private static readonly ICache _cache;
+        private static readonly ICache _Cache;
 
         private static ConnectionType _connectionStringType;
 
@@ -40,13 +42,7 @@ namespace Fanex.ConnectionString.Client
                 ConnectionStringWatcher.Start();
             }
 
-            _cache = CacheService.CreateInstance(CacheType.MemoryCache);
-        }
-
-        public static void Start()
-        {
-            ConnectionStringWatcher.Stop();
-            ConnectionStringWatcher.Start();            
+            _Cache = CacheService.CreateInstance(CacheType.MemoryCache);
         }
 
         public static ConnectionStringSettingsCollection ConnectionStrings
@@ -59,7 +55,7 @@ namespace Fanex.ConnectionString.Client
 
                     if (_connectionStringType == ConnectionType.Remote)
                     {
-                        collection = _cache.Get<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY);
+                        collection = _Cache.Get<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY);
                     }
                     else
                     {
@@ -73,6 +69,12 @@ namespace Fanex.ConnectionString.Client
                     throw ex;
                 }
             }
+        }
+
+        public static void Start()
+        {
+            ConnectionStringWatcher.Stop();
+            ConnectionStringWatcher.Start();
         }
 
         public static void Stop()

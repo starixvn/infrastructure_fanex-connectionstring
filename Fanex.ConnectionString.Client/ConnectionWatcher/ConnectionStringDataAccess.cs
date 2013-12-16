@@ -14,7 +14,10 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    
+
+    /// <summary>
+    /// The connection string data access class.
+    /// </summary>
     internal class ConnectionStringDataAccess : IDisposable
     {
         #region Memeber
@@ -39,23 +42,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
             this._command.Connection = this._connection;
         }
 
-        #endregion
-
-        /// <summary>
-        /// Start
-        /// </summary>
-        public void Start()
-        {
-            RegisterForChanges();
-        }
-
-        /// <summary>
-        /// Stop
-        /// </summary>
-        public void Stop()
-        {
-            SqlDependency.Stop(this._connectionString);
-        }
+        #endregion        
 
         public delegate void SqlWatcherEventHandler(IDataReader Result);
 
@@ -66,6 +53,51 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
             get { return _result; }
         }
 
+        public void Start()
+        {
+            RegisterForChanges();
+        }
+
+        public void Stop()
+        {
+            SqlDependency.Stop(this._connectionString);
+        }
+
+        public void ChangeEventWrapper(object state)
+        {
+            IDataReader result = (IDataReader)state;
+            OnChange(result);
+        }
+
+        public void Dispose()
+        {
+            Stop();
+        }
+
+        /// <summary>
+        /// Handles the OnChange event of the Handle control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SqlNotificationEventArgs"/> instance containing the event data.</param>
+        /// <exception cref="System.ApplicationException">Failed to create queue notification subscription!.</exception>
+        private void Handle_OnChange(object sender, SqlNotificationEventArgs e)
+        {
+            if (e.Type != SqlNotificationType.Change)
+            {
+                throw new ApplicationException("Failed to create queue notification subscription!");
+            }
+
+            // Clean up the old notification
+            SqlDependency dep = (SqlDependency)sender;
+            dep.OnChange -= Handle_OnChange;
+
+            // Register for the new notification
+            RegisterForChanges();
+        }
+
+        /// <summary>
+        /// Registers for changes.
+        /// </summary>
         private void RegisterForChanges()
         {
             try
@@ -75,14 +107,17 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                     this._connection.Open();
                 }
 
-                //Remove old dependency object
+                // Remove old dependency object
                 this._command.Notification = null;
-                //Create new dependency object
+
+                // Create new dependency object
                 SqlDependency dep = new SqlDependency(this._command);
                 dep.OnChange += new OnChangeEventHandler(Handle_OnChange);
-                //Save data            
+
+                // Save data
                 _result = this._command.ExecuteReader();
-                //Notify client of change to DataSet
+
+                // Notify client of change to DataSet
                 switch (_notificationType)
                 {
                     case SqlWatcherNotificationType.Blocking:
@@ -101,32 +136,6 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
             {
                 this._connection.Close();
             }
-        }
-
-        public void ChangeEventWrapper(object state)
-        {
-            IDataReader Result = (IDataReader)state;
-            OnChange(Result);
-        }
-
-        private void Handle_OnChange(object sender, SqlNotificationEventArgs e)
-        {
-            if (e.Type != SqlNotificationType.Change)
-            {
-                throw new ApplicationException("Failed to create queue notification subscription!");
-            }
-
-            //Clean up the old notification
-            SqlDependency dep = (SqlDependency)sender;
-            dep.OnChange -= Handle_OnChange;
-
-            //Register for the new notification
-            RegisterForChanges();
-        }
-
-        public void Dispose()
-        {
-            Stop();
         }
     }
 }

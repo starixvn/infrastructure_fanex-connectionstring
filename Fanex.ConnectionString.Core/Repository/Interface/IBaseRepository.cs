@@ -9,18 +9,11 @@
 
 namespace Fanex.ConnectionString.Core.Repository.Interface
 {
-    using System;
     using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
     using Fanex.NAP.Framework.Data;
 
     public interface IBaseRepository
     {
-        IEnumerable<S> Fetch<S>(
-            ICriteria criteria,
-            Func<IDataReader, S> mapObjectFunction) where S : class;
-
         ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria);
 
         CommandResult GetCommandResult(Hashtable hash);

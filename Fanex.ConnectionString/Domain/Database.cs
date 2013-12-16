@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabase.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Database.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,6 +11,9 @@ namespace Fanex.ConnectionString.Domain
 {
     using System;
 
+    /// <summary>
+    /// The database class.
+    /// </summary>
     public class Database : Entity
     {
         public string ServerAlias { get; set; }

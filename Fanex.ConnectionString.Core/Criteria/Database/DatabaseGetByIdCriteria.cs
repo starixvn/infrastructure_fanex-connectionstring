@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasDatabaseGetByIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseGetByIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,6 +11,9 @@ namespace Fanex.ConnectionString.Core.Criteria.AliasDatabase
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The database get by identifier criteria class.
+    /// </summary>
     internal class DatabaseGetByIdCriteria : CriteriaBase
     {
         public int DatabaseId { get; set; }

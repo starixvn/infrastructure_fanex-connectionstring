@@ -10,6 +10,7 @@
 namespace Fanex.ConnectionString.Client.ConnectionWatcher
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Data;
     using System.Data.SqlClient;
@@ -18,119 +19,45 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System.Xml.Linq;
     using Fanex.Caching;
     using Fanex.ConnectionString.Client.Configuration;
-    using System.Collections.Generic;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// The connection string watcher class.
+    /// </summary>
     internal static class ConnectionStringWatcher
     {
         #region Member
 
+        private static readonly string _CommandText = "bodb_ConnectionString.dbo.Connection_ClientGet";
+        private static readonly string _SqlConnection = ConnectionSettings.Settings.Connection;
+        private static readonly int _CurrentSiteId = ConnectionSettings.Settings.SiteId;
         private static ConnectionStringDataAccess _connectionStringDataAccess;
-
-        private static readonly string _commandText = "bodb_ConnectionString.dbo.Connection_ClientGet";
-
-        private static readonly string _sqlConnection = ConnectionSettings.Settings.Connection;
-
         private static string _filePath = ConnectionSettings.Settings.FilePath;
-
         private static ICache _cache = CacheService.CreateInstance(CacheType.MemoryCache);
-
-        private static readonly int _currentSiteId = ConnectionSettings.Settings.SiteId;
 
         #endregion
 
         /// <summary>
-        /// Start sql dependency
+        /// Start SQL dependency.
         /// </summary>
         public static void Start()
         {
             _filePath = GetResourcePath(_filePath);
-            //Build the command object we want to monitor (don't include a SqlConnection)
+
+            // Build the command object we want to monitor (don't include a SqlConnection)
             SqlCommand cmd = new SqlCommand();
-            cmd = new SqlCommand(_commandText);
+            cmd = new SqlCommand(_CommandText);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            //Setup the SQLWatcher
-            _connectionStringDataAccess = new ConnectionStringDataAccess(_sqlConnection, cmd, SqlWatcherNotificationType.Blocking);
+            // Setup the SQLWatcher
+            _connectionStringDataAccess = new ConnectionStringDataAccess(_SqlConnection, cmd, SqlWatcherNotificationType.Blocking);
             _connectionStringDataAccess.OnChange += new ConnectionStringDataAccess.SqlWatcherEventHandler(QueueSQLWatcher_OnChange);
             _connectionStringDataAccess.Start();
         }
 
         /// <summary>
-        /// Trace data change
+        /// Generates the connection string file.
         /// </summary>
-        /// <param name="reader"></param>
-        private static void QueueSQLWatcher_OnChange(IDataReader reader)
-        {
-            try
-            {
-                var collection = new ConnectionStringSettingsCollection();
-                var allConnection = new Dictionary<int, string>();
-
-                while (reader.Read())
-                {
-                    var connectionId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"].ToString()) : 0;
-                    var name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty;
-                    var serverIp = reader["ServerIP"] != DBNull.Value ? reader["ServerIP"].ToString() : string.Empty;
-                    var databaseName = reader["DatabaseName"] != DBNull.Value ? reader["DatabaseName"].ToString() : string.Empty;
-                    var loginName = reader["LoginName"] != DBNull.Value ? reader["LoginName"].ToString() : string.Empty;
-                    var password = reader["Password"] != DBNull.Value ? reader["Password"].ToString() : string.Empty;
-                    var freeText = reader["FreeText"] != DBNull.Value ? reader["FreeText"].ToString() : string.Empty;
-                    var siteId = reader["SiteId"] != DBNull.Value ? Convert.ToInt32(reader["SiteId"].ToString()) : 0;
-
-                    var connectionString = string.Format(ConnectionStringConstant.CONNECTIONFORMAT,
-                                                            serverIp,
-                                                            databaseName,
-                                                            loginName,
-                                                            password,
-                                                            freeText);
-
-                    if (_currentSiteId != 0)
-                    {
-                        if (siteId == _currentSiteId)
-                        {
-                            collection.Add(new ConnectionStringSettings
-                            {
-                                Name = name,
-                                ConnectionString = connectionString,
-                                ProviderName = ConnectionStringConstant.PROVIDERNAME
-                            });
-                        }
-                    }
-                    else
-                    {
-                        if (!allConnection.ContainsKey(connectionId))
-                        {
-                            allConnection.Add(connectionId, name);
-
-                            collection.Add(new ConnectionStringSettings
-                            {
-                                Name = name,
-                                ConnectionString = connectionString,
-                                ProviderName = ConnectionStringConstant.PROVIDERNAME
-                            });
-                        }
-                    }
-                }
-
-                _cache.Set<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY, collection, DateTime.MaxValue);
-
-                GenerateConnectionStringFile(collection);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                reader.Close();
-            }
-        }
-
-        /// <summary>
-        /// Generate connection string file with format xml
-        /// </summary>
-        /// <param name="collection"></param>
+        /// <param name="collection">The collection.</param>
         public static void GenerateConnectionStringFile(ConnectionStringSettingsCollection collection)
         {
             try
@@ -179,7 +106,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         }
 
         /// <summary>
-        /// Stop sql dependency
+        /// Stop SQL dependency.
         /// </summary>
         public static void Stop()
         {
@@ -187,10 +114,85 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         }
 
         /// <summary>
-        /// Get path
+        /// Queues the SQL watcher on change.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
+        /// <param name="reader">The reader.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
+        private static void QueueSQLWatcher_OnChange(IDataReader reader)
+        {
+            try
+            {
+                var collection = new ConnectionStringSettingsCollection();
+                var allConnection = new Dictionary<int, string>();
+
+                while (reader.Read())
+                {
+                    var connectionId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"].ToString()) : 0;
+                    var name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty;
+                    var serverIp = reader["ServerIP"] != DBNull.Value ? reader["ServerIP"].ToString() : string.Empty;
+                    var databaseName = reader["DatabaseName"] != DBNull.Value ? reader["DatabaseName"].ToString() : string.Empty;
+                    var loginName = reader["LoginName"] != DBNull.Value ? reader["LoginName"].ToString() : string.Empty;
+                    var password = reader["Password"] != DBNull.Value ? reader["Password"].ToString() : string.Empty;
+                    var freeText = reader["FreeText"] != DBNull.Value ? reader["FreeText"].ToString() : string.Empty;
+                    var siteId = reader["SiteId"] != DBNull.Value ? Convert.ToInt32(reader["SiteId"].ToString()) : 0;
+
+                    var connectionString = string.Format(
+                                                            ConnectionStringConstant.CONNECTIONFORMAT,
+                                                            serverIp,
+                                                            databaseName,
+                                                            loginName,
+                                                            password,
+                                                            freeText);
+
+                    if (_CurrentSiteId != 0)
+                    {
+                        if (siteId == _CurrentSiteId)
+                        {
+                            collection.Add(new ConnectionStringSettings
+                            {
+                                Name = name,
+                                ConnectionString = connectionString,
+                                ProviderName = ConnectionStringConstant.PROVIDERNAME
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (!allConnection.ContainsKey(connectionId))
+                        {
+                            allConnection.Add(connectionId, name);
+
+                            collection.Add(new ConnectionStringSettings
+                            {
+                                Name = name,
+                                ConnectionString = connectionString,
+                                ProviderName = ConnectionStringConstant.PROVIDERNAME
+                            });
+                        }
+                    }
+                }
+
+                _cache.Set<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY, collection, DateTime.MaxValue);
+
+                GenerateConnectionStringFile(collection);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                reader.Close();
+            }
+        }
+
+        /// <summary>
+        /// Gets the resource path.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>The file resource full path.</returns>
+        /// <exception cref="System.NullReferenceException">Throw exception when file path is null.</exception>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Reviewed. Suppression is OK here.")]
         private static string GetResourcePath(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -198,7 +200,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                 throw new NullReferenceException(Resources.FilePathNotSetYet);
             }
 
-            // check root path http://msdn.microsoft.com/query/dev10.query?appId=Dev10IDEF1&l=EN-US&k=k%28SYSTEM.IO.PATH.ISPATHROOTED%29;k%28SOLUTIONITEMSPROJECT%29;k%28TargetFrameworkMoniker-%22.NETFRAMEWORK%2cVERSION%3dV4.0%22%29;k%28DevLang-CSHARP%29&rd=true
+            // Check root path http://msdn.microsoft.com/query/dev10.query?appId=Dev10IDEF1&l=EN-US&k=k%28SYSTEM.IO.PATH.ISPATHROOTED%29;k%28SOLUTIONITEMSPROJECT%29;k%28TargetFrameworkMoniker-%22.NETFRAMEWORK%2cVERSION%3dV4.0%22%29;k%28DevLang-CSHARP%29&rd=true
             if (!Path.IsPathRooted(filePath))
             {
                 if (filePath.StartsWith("~"))

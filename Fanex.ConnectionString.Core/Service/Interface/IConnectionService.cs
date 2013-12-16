@@ -21,7 +21,7 @@ namespace Fanex.ConnectionString.Core.Service.Interface
     {
         Connection GetById(int id);
 
-        IEnumerable<Connection> GetAll(int dbServerId = 0);
+        IEnumerable<Connection> GetAll(int databaseServerId = 0);
 
         ICommandResult Insert(Connection connection);
 
