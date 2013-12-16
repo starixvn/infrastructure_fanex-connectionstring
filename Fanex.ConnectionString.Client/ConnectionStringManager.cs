@@ -12,7 +12,7 @@ namespace Fanex.ConnectionString.Client
     using System;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.Caching;
+    using Fanex.ConnectionString.Client.Cache;
     using Fanex.ConnectionString.Client.Configuration;
     using Fanex.ConnectionString.Client.ConnectionWatcher;
 
@@ -22,8 +22,6 @@ namespace Fanex.ConnectionString.Client
     public static class ConnectionStringManager
     {
         #region Member
-
-        private static readonly ICache _Cache;
 
         private static ConnectionType _connectionStringType;
 
@@ -41,8 +39,6 @@ namespace Fanex.ConnectionString.Client
             {
                 ConnectionStringWatcher.Start();
             }
-
-            _Cache = CacheService.CreateInstance(CacheType.MemoryCache);
         }
 
         public static ConnectionStringSettingsCollection ConnectionStrings
@@ -55,7 +51,7 @@ namespace Fanex.ConnectionString.Client
 
                     if (_connectionStringType == ConnectionType.Remote)
                     {
-                        collection = _Cache.Get<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY);
+                        collection = CacheManager.Cache.Get<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY);
                     }
                     else
                     {

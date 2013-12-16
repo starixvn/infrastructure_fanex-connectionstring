@@ -17,7 +17,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Xml.Linq;
-    using Fanex.Caching;
+    using Fanex.ConnectionString.Client.Cache;
     using Fanex.ConnectionString.Client.Configuration;
 
     /// <summary>
@@ -32,7 +32,6 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         private static readonly int _CurrentSiteId = ConnectionSettings.Settings.SiteId;
         private static ConnectionStringDataAccess _connectionStringDataAccess;
         private static string _filePath = ConnectionSettings.Settings.FilePath;
-        private static ICache _cache = CacheService.CreateInstance(CacheType.MemoryCache);
 
         #endregion
 
@@ -141,8 +140,12 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                                                             serverIp,
                                                             databaseName,
                                                             loginName,
-                                                            password,
-                                                            freeText);
+                                                            password);
+
+                    if (!string.IsNullOrWhiteSpace(freeText))
+                    {
+                        connectionString += ";" + freeText;
+                    }
 
                     if (_CurrentSiteId != 0)
                     {
@@ -172,7 +175,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                     }
                 }
 
-                _cache.Set<ConnectionStringSettingsCollection>(ConnectionStringConstant.PREKEY, collection, DateTime.MaxValue);
+                CacheManager.Cache.Set(ConnectionStringConstant.PREKEY, collection);
 
                 GenerateConnectionStringFile(collection);
             }

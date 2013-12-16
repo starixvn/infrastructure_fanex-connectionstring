@@ -17,7 +17,7 @@ namespace Fanex.ConnectionString.Domain
     /// </summary>
     public class Connection : Entity
     {
-        private const string CONNECTIONFORMAT = "packet size=4096; Data Source={0};Initial Catalog={1}; integrated security=false; User ID={2}; Password={3}; {4}";
+        private const string CONNECTIONFORMAT = "packet size=4096; Data Source={0};Initial Catalog={1};integrated security=false; User ID={2};Password={3}";
 
         public string LoginName { get; set; }
 
@@ -42,8 +42,12 @@ namespace Fanex.ConnectionString.Domain
                                                             DatabaseServer.ServerIP,
                                                             DatabaseServer.Name,
                                                             LoginName,
-                                                            Password,
-                                                            FreeText);
+                                                            Password);
+                    if (!string.IsNullOrWhiteSpace(FreeText))
+                    {
+                        tempConnection += ";" + FreeText;
+                    }
+
                     return tempConnection;
                 }
 

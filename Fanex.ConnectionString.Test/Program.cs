@@ -28,9 +28,9 @@ namespace Fanex.ConnectionString.Test
             while (true)
             {
                 
-                System.Console.WriteLine("DBLOG.bodb_CustomerLog.bodbAdminNet");
-                var connection = ConfigurationManager.ConnectionStrings["DBLOG.bodb_CustomerLog.bodbAdminNet"].ConnectionString;
-                System.Console.WriteLine(connection);
+                //System.Console.WriteLine("DBLOG.bodb_CustomerLog.bodbAdminNet");
+                //var connection = ConfigurationManager.ConnectionStrings["DBLOG.bodb_CustomerLog.bodbAdminNet"].ConnectionString;
+                //System.Console.WriteLine(connection);
                 System.Console.WriteLine("----------");
 
                 Thread.Sleep(5000);

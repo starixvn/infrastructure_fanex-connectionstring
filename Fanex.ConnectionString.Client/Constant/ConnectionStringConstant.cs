@@ -29,7 +29,7 @@ namespace Fanex.ConnectionString.Client
         /// <summary>
         /// The connection string format.
         /// </summary>
-        public const string CONNECTIONFORMAT = "packet size=4096; Data Source={0};Initial Catalog={1}; integrated security=false; User ID={2}; Password={3}; {4}";
+        public const string CONNECTIONFORMAT = "packet size=4096; Data Source={0};Initial Catalog={1};integrated security=false; User ID={2};Password={3}";
 
         /// <summary>
         /// The provider name.
