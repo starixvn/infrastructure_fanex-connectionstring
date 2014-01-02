@@ -23,18 +23,12 @@ namespace Fanex.ConnectionString.Client
     {
         #region Member
 
-        private static ConnectionType _connectionStringType;
-
-        private static int _siteId;
+        private static ConnectionType _connectionStringType = ConnectionSettings.Settings.IsLocal ? ConnectionType.Local : ConnectionType.Remote;
 
         #endregion
 
         static ConnectionStringManager()
         {
-            _siteId = ConnectionSettings.Settings.SiteId;
-
-            _connectionStringType = ConnectionSettings.Settings.IsLocal ? ConnectionType.Local : ConnectionType.Remote;
-
             if (_connectionStringType == ConnectionType.Remote)
             {
                 ConnectionStringWatcher.Start();
@@ -60,9 +54,9 @@ namespace Fanex.ConnectionString.Client
 
                     return collection;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    throw ex;
+                    throw;
                 }
             }
         }

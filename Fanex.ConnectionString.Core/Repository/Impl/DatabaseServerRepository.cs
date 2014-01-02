@@ -18,7 +18,7 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The database server repository.
     /// </summary>
     public class DatabaseServerRepository : BaseRepository<DatabaseServer>, IDatabaseServerRepository
     {

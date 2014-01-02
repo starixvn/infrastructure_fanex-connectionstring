@@ -13,7 +13,7 @@ namespace Fanex.ConnectionString.Core.Repository.Interface
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The database server repository interface.
     /// </summary>
     public interface IDatabaseServerRepository : IBaseRepository, IReadonlyRepository<DatabaseServer>
     {

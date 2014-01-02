@@ -179,9 +179,9 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
 
                 GenerateConnectionStringFile(collection);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -200,7 +200,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                throw new NullReferenceException(Resources.FilePathNotSetYet);
+                throw new NullReferenceException("File path has not been set yet!");
             }
 
             // Check root path http://msdn.microsoft.com/query/dev10.query?appId=Dev10IDEF1&l=EN-US&k=k%28SYSTEM.IO.PATH.ISPATHROOTED%29;k%28SOLUTIONITEMSPROJECT%29;k%28TargetFrameworkMoniker-%22.NETFRAMEWORK%2cVERSION%3dV4.0%22%29;k%28DevLang-CSHARP%29&rd=true

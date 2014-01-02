@@ -18,7 +18,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
     using Fanex.ConnectionString.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The log service class.
     /// </summary>
     public class LogService : BaseService, ILogService
     {

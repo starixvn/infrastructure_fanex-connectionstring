@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criteria\Connection\ConnectionAssignSiteCriteria.cs" />
+    <Compile Include="Criteria\Connection\ConnectionGetBySiteIdCriteria.cs" />
     <Compile Include="Criteria\Connection\ConnectionRemoveSiteCriteria.cs" />
     <Compile Include="Criteria\Site\SiteGetByConnectionCriteria.cs" />
     <Compile Include="Criteria\Connection\ConnectionSwitchDbServerCriteria.cs" />
@@ -109,17 +110,6 @@
     <Compile Include="Service\Interface\IDatabaseServerService.cs" />
     <Compile Include="Service\Interface\ILogService.cs" />
     <Compile Include="Service\Interface\ISiteService.cs" />
-    <Compile Include="ViewResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewResource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ViewResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

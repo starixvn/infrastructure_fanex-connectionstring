@@ -17,7 +17,7 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The site repository class.
     /// </summary>
     public class SiteRepository : BaseRepository<Site>, ISiteRepository
     {

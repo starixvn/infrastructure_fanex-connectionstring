@@ -23,6 +23,8 @@ namespace Fanex.ConnectionString.Core.Service.Interface
 
         IEnumerable<Connection> GetAll(int databaseServerId = 0);
 
+        IEnumerable<Connection> GetBySiteId(int siteId);
+
         ICommandResult Insert(Connection connection);
 
         ICommandResult Update(Connection connection);

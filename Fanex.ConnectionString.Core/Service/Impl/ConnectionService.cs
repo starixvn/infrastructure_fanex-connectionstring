@@ -90,6 +90,28 @@ namespace Fanex.ConnectionString.Core.Service.Impl
         }
 
         /// <summary>
+        /// Gets the connection by site identifier.
+        /// </summary>
+        /// <param name="siteId">The site identifier.</param>
+        /// <returns>Connection collection.</returns>
+        public IEnumerable<Connection> GetBySiteId(int siteId)
+        {
+            Check.Argument.IsNotNegative(siteId, "siteId");
+
+            var criteria = new ConnectionGetBySiteIdCriteria
+            {
+                SiteId = siteId
+            };
+
+            if (criteria.IsValid())
+            {
+                return _connectionRepository.Fetch(criteria);
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Insert or update connection.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
