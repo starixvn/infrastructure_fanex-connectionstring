@@ -9,9 +9,7 @@
 
 namespace Fanex.ConnectionString.Client
 {
-    using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Client.Cache;
     using Fanex.ConnectionString.Client.Configuration;
     using Fanex.ConnectionString.Client.ConnectionWatcher;

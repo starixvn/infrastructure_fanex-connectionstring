@@ -19,7 +19,8 @@ namespace Fanex.ConnectionString.Core.Service.Impl
     using Fanex.ConnectionString.Core.Service.Interface;
     using Fanex.ConnectionString.Domain;
     using Fanex.NAP.Core.Criteria.Misc;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Database service class.

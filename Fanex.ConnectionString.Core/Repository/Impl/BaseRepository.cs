@@ -15,6 +15,7 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.Data;
     using Fanex.NAP.Core.Criteria.Misc;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

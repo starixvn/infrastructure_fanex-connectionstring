@@ -12,7 +12,7 @@ namespace Fanex.ConnectionString.Core.Service.Interface
     using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
     using Fanex.ConnectionString.Model;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Connection service interface.

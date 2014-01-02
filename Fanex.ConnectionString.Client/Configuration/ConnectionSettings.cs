@@ -10,7 +10,6 @@
 namespace Fanex.ConnectionString.Client.Configuration
 {
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The connection string setting.

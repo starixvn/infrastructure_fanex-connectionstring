@@ -16,6 +16,7 @@ namespace Fanex.ConnectionString.Core.Service.Impl
     using Fanex.ConnectionString.Core.Repository.Interface;
     using Fanex.ConnectionString.Core.Service.Interface;
     using Fanex.ConnectionString.Model;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// The log service class.

@@ -10,7 +10,6 @@
 namespace Fanex.ConnectionString.Domain
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The database server class.
