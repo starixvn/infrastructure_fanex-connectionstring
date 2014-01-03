@@ -9,8 +9,6 @@
 
 namespace Fanex.ConnectionString.Client
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// The connection string constant.
     /// </summary>

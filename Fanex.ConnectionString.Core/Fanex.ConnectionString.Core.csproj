@@ -100,7 +100,6 @@
     <Compile Include="Repository\Interface\ILogRepository.cs" />
     <Compile Include="Repository\Interface\ISiteRepository.cs" />
     <Compile Include="Service\Impl\DatabaseService.cs" />
-    <Compile Include="Service\Impl\BaseService.cs" />
     <Compile Include="Service\Impl\ConnectionService.cs" />
     <Compile Include="Service\Impl\DatabaseServerService.cs" />
     <Compile Include="Service\Impl\LogService.cs" />

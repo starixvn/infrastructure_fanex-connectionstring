@@ -12,7 +12,6 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
     using System;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     /// <summary>

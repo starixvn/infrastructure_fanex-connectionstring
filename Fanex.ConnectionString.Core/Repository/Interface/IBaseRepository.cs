@@ -10,6 +10,7 @@
 namespace Fanex.ConnectionString.Core.Repository.Interface
 {
     using System.Collections;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     public interface IBaseRepository
