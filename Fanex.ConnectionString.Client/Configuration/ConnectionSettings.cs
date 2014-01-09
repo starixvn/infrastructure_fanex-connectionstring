@@ -19,15 +19,12 @@ namespace Fanex.ConnectionString.Client.Configuration
         #region consts
 
         private const string __CONNECTION_STRING_SETTING = "ConnectionSettings";
-
         private const string __CONNECTION_STRING = "Connection";
-
         private const string __IS_LOCAL = "IsLocal";
-
         private const string __FILE_PATH = "FilePath";
-
         private const string __SITE_ID = "SiteId";
-
+        private const string __QUEUE_NAME = "Queue";
+        private const string __SERVICE_NAME = "Service";
         #endregion
 
         private static ConnectionSettings _settings = ConfigurationManager.GetSection(__CONNECTION_STRING_SETTING) as ConnectionSettings;
@@ -66,6 +63,20 @@ namespace Fanex.ConnectionString.Client.Configuration
         {
             get { return (int)this[__SITE_ID]; }
             set { this[__SITE_ID] = value; }
+        }
+
+        [ConfigurationProperty(__QUEUE_NAME, IsRequired = true)]
+        public string Queue
+        {
+            get { return (string)this[__QUEUE_NAME]; }
+            set { this[__QUEUE_NAME] = value; }
+        }
+
+        [ConfigurationProperty(__SERVICE_NAME, IsRequired = true)]
+        public string Service
+        {
+            get { return (string)this[__SERVICE_NAME]; }
+            set { this[__SERVICE_NAME] = value; }
         }
     }
 }
