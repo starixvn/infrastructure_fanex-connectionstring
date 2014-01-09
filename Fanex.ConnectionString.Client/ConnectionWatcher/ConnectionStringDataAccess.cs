@@ -35,13 +35,13 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         {
             this._notificationType = notificationType;
             this._connectionString = connectionString;
-            SqlDependency.Start(this._connectionString);
+            SqlDependency.Start(this._connectionString, ConnectionStringConstant.QUEUENAME);
             this._connection = new SqlConnection(this._connectionString);
             this._command = command;
             this._command.Connection = this._connection;
         }
 
-        #endregion        
+        #endregion
 
         public delegate void SqlWatcherEventHandler(IDataReader Result);
 
@@ -59,7 +59,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
 
         public void Stop()
         {
-            SqlDependency.Stop(this._connectionString);
+            SqlDependency.Stop(this._connectionString, ConnectionStringConstant.QUEUENAME);
         }
 
         public void ChangeEventWrapper(object state)
@@ -110,7 +110,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                 this._command.Notification = null;
 
                 // Create new dependency object
-                SqlDependency dep = new SqlDependency(this._command);
+                SqlDependency dep = new SqlDependency(this._command, "service=Connection_Notification_Service;local database=bodb_ConnectionString", 120);
                 dep.OnChange += new OnChangeEventHandler(Handle_OnChange);
 
                 // Save data

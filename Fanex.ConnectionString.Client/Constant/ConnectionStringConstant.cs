@@ -33,5 +33,7 @@ namespace Fanex.ConnectionString.Client
         /// The provider name.
         /// </summary>
         public const string PROVIDERNAME = "System.Data.SqlClient";
+
+        public const string QUEUENAME = "Connection_Notification_Queue";
     }
 }
