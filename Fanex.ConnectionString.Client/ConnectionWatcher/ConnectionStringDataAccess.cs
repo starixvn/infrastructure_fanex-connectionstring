@@ -27,6 +27,8 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         private SqlCommand _command;
         private IDataReader _result;
         private SqlWatcherNotificationType _notificationType;
+        private SqlConnectionStringBuilder _connectionStringBuilder;
+        private string _databaseName;
 
         #endregion
 
@@ -40,6 +42,8 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
             this._connection = new SqlConnection(this._connectionString);
             this._command = command;
             this._command.Connection = this._connection;
+            this._connectionStringBuilder = new SqlConnectionStringBuilder(this._connectionString);
+            this._databaseName = this._connectionStringBuilder.InitialCatalog;
         }
 
         #endregion
@@ -111,7 +115,10 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                 this._command.Notification = null;
 
                 // Create new dependency object
-                SqlDependency dep = new SqlDependency(this._command, string.Format("service={0};local database=bodb_ConnectionString", ConnectionSettings.Settings.Service), 120);
+                SqlDependency dep = new SqlDependency(
+                    command: this._command,
+                    options: string.Format("service={0};local database={1}", ConnectionSettings.Settings.Service, this._databaseName),
+                    timeout: 120);
                 dep.OnChange += new OnChangeEventHandler(Handle_OnChange);
 
                 // Save data
