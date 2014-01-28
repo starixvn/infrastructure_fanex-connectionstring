@@ -45,21 +45,14 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
         /// <returns>Database server.</returns>
         public override DatabaseServer Get(ICriteria criteria)
         {
-            try
-            {
-                var list = this.Fetch(criteria);
+            var list = this.Fetch(criteria);
 
-                if (!ReferenceEquals(list, null))
-                {
-                    return list.ToList().FirstOrDefault();
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (!ReferenceEquals(list, null))
             {
-                throw ex;
+                return list.ToList().FirstOrDefault();
             }
+
+            return null;
         }
     }
 }
