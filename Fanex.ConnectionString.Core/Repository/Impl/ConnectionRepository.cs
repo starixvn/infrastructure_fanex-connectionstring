@@ -9,7 +9,6 @@
 
 namespace Fanex.ConnectionString.Core.Repository.Impl
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.ConnectionString.Core.Repository.Interface;
@@ -29,24 +28,17 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
         /// <returns>The collection of connection object.</returns>
         public override IEnumerable<Connection> Fetch(ICriteria criteria)
         {
-            try
-            {
-                IEnumerable<Connection> list = null;
+            IEnumerable<Connection> list = null;
 
-                using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    list = objDb.Query<Connection, Users, Users, DatabaseServer, Database, Connection>(
-                        func: (c, uc, um, ds, d) => { c.Creator = uc; c.Modifier = um; c.DatabaseServer = ds; c.Database = d; return c; },
-                        splitOn: "CreatorId,ModifierId,DbServerId,DatabaseId",
-                        parameterValues: criteria.GetSpParams());
-                }
-
-                return list;
-            }
-            catch (Exception ex)
+            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                throw ex;
+                list = objDb.Query<Connection, Users, Users, DatabaseServer, Database, Connection>(
+                    func: (c, uc, um, ds, d) => { c.Creator = uc; c.Modifier = um; c.DatabaseServer = ds; c.Database = d; return c; },
+                    splitOn: "CreatorId,ModifierId,DbServerId,DatabaseId",
+                    parameterValues: criteria.GetSpParams());
             }
+
+            return list;
         }
 
         /// <summary>
@@ -56,21 +48,14 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
         /// <returns>The connection object.</returns>
         public override Connection Get(ICriteria criteria)
         {
-            try
-            {
-                var list = this.Fetch(criteria);
+            var list = this.Fetch(criteria);
 
-                if (!ReferenceEquals(list, null))
-                {
-                    return list.ToList().FirstOrDefault();
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (!ReferenceEquals(list, null))
             {
-                throw ex;
+                return list.ToList().FirstOrDefault();
             }
+
+            return null;
         }
     }
 }

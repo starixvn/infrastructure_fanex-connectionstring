@@ -76,6 +76,7 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         public void Dispose()
         {
             Stop();
+            _connection.Dispose();
         }
 
         /// <summary>
@@ -135,9 +136,9 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
                         break;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
             finally
             {

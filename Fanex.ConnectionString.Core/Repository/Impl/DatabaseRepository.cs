@@ -9,7 +9,6 @@
 
 namespace Fanex.ConnectionString.Core.Repository.Impl
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -30,21 +29,14 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
         /// <returns>The database object.</returns>
         public override Database Get(ICriteria criteria)
         {
-            try
-            {
-                var list = this.Fetch(criteria);
+            var list = this.Fetch(criteria);
 
-                if (!ReferenceEquals(list, null))
-                {
-                    return list.ToList().FirstOrDefault();
-                }
-
-                return null;
-            }
-            catch (Exception ex)
+            if (!ReferenceEquals(list, null))
             {
-                throw ex;
+                return list.ToList().FirstOrDefault();
             }
+
+            return null;
         }
 
         /// <summary>
@@ -54,24 +46,17 @@ namespace Fanex.ConnectionString.Core.Repository.Impl
         /// <returns>The collection of database object.</returns>
         public override IEnumerable<Database> Fetch(ICriteria criteria)
         {
-            try
-            {
-                IEnumerable<Database> list = null;
+            IEnumerable<Database> list = null;
 
-                using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    list = objDb.Query<Database, Users, Users, DatabaseServer, Database>(
-                        func: (a, uc, um, d) => { a.Creator = uc; a.Modifier = um; a.DatabaseServer = d; return a; },
-                        splitOn: "CreatorId,ModifierId,DbServerId",
-                        parameterValues: criteria.GetSpParams());
-                }
-
-                return list;
-            }
-            catch (Exception ex)
+            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                throw ex;
+                list = objDb.Query<Database, Users, Users, DatabaseServer, Database>(
+                    func: (a, uc, um, d) => { a.Creator = uc; a.Modifier = um; a.DatabaseServer = d; return a; },
+                    splitOn: "CreatorId,ModifierId,DbServerId",
+                    parameterValues: criteria.GetSpParams());
             }
+
+            return list;
         }
     }
 }

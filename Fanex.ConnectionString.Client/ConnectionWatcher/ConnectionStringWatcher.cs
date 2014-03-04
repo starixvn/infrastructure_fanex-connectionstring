@@ -59,48 +59,41 @@ namespace Fanex.ConnectionString.Client.ConnectionWatcher
         /// <param name="collection">The collection.</param>
         public static void GenerateConnectionStringFile(ConnectionStringSettingsCollection collection)
         {
-            try
+            var document = new XDocument();
+            var elementRoot = new XElement("connectionStrings");
+
+            foreach (ConnectionStringSettings item in collection)
             {
-                var document = new XDocument();
-                var elementRoot = new XElement("connectionStrings");
+                var elementConnection = new XElement("add");
+                var attributeName = new XAttribute("name", item.Name.ToLower());
+                var attributeConnectionString = new XAttribute("connectionString", item.ConnectionString);
+                var attributeProvider = new XAttribute("providerName", "System.Data.SqlClient");
 
-                foreach (ConnectionStringSettings item in collection)
-                {
-                    var elementConnection = new XElement("add");
-                    var attributeName = new XAttribute("name", item.Name.ToLower());
-                    var attributeConnectionString = new XAttribute("connectionString", item.ConnectionString);
-                    var attributeProvider = new XAttribute("providerName", "System.Data.SqlClient");
+                elementConnection.Add(attributeName);
+                elementConnection.Add(attributeConnectionString);
+                elementConnection.Add(attributeProvider);
 
-                    elementConnection.Add(attributeName);
-                    elementConnection.Add(attributeConnectionString);
-                    elementConnection.Add(attributeProvider);
-
-                    elementRoot.Add(elementConnection);
-                }
-
-                document.Add(elementRoot);
-
-                var hasChange = false;
-
-                if (File.Exists(_filePath))
-                {
-                    var configDocument = XDocument.Load(_filePath);
-
-                    hasChange = !string.Equals(document.ToString(), configDocument.ToString(), StringComparison.OrdinalIgnoreCase);
-                }
-                else
-                {
-                    hasChange = true;
-                }
-
-                if (hasChange)
-                {
-                    document.Save(_filePath);
-                }
+                elementRoot.Add(elementConnection);
             }
-            catch (Exception ex)
+
+            document.Add(elementRoot);
+
+            var hasChange = false;
+
+            if (File.Exists(_filePath))
             {
-                throw ex;
+                var configDocument = XDocument.Load(_filePath);
+
+                hasChange = !string.Equals(document.ToString(), configDocument.ToString(), StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                hasChange = true;
+            }
+
+            if (hasChange)
+            {
+                document.Save(_filePath);
             }
         }
 
